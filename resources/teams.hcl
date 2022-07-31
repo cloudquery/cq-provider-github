@@ -39,7 +39,7 @@ resource "github" "" "teams" {
     path = "github.com/google/go-github/v45/github.User"
 
     options {
-      primary_keys = ["team_id", "user_id"]
+      primary_keys = ["team_id", "id"]
     }
 
     userDefinedColumn "team_id" {
@@ -68,50 +68,49 @@ resource "github" "" "teams" {
 
   }
 
+  user_relation "github" "" "repositories" {
+    path = "github.com/google/go-github/v45/github.Repository"
 
-#  user_relation "github" "" "repositories" {
-#    path = "github.com/google/go-github/v45/github.Repository"
-#
-#    options {
-#      primary_keys = ["team_id", "user_id"]
-#    }
-#
-#    userDefinedColumn "team_id" {
-#      type        = "string"
-#      //argument ("name")
-#      description = "The id of the team"
-#      resolver "parentPathResolver" {
-#        path          = "github.com/cloudquery/cq-provider-sdk/provider/schema.ParentResourceFieldResolver"
-#        generate      = true
-#        path_resolver = true
-#      }
-#    }
-#
-#    column "parent" {
-#      type              = "int"
-#      generate_resolver = true
-#    }
-#
-#    column "source" {
-#      type              = "int"
-#      generate_resolver = true
-#    }
-#
-#    column "template_repository" {
-#      type              = "int"
-#      generate_resolver = true
-#    }
-#
-#
-#    column "text_matches" {
-#      type              = "json"
-#      generate_resolver = true
-#    }
-#
-#    column "owner_text_matches" {
-#      type              = "json"
-#      generate_resolver = true
-#    }
-#  }
+    options {
+      primary_keys = ["team_id", "id"]
+    }
+
+    userDefinedColumn "team_id" {
+      type        = "string"
+      //argument ("name")
+      description = "The id of the team"
+      resolver "parentPathResolver" {
+        path          = "github.com/cloudquery/cq-provider-sdk/provider/schema.ParentResourceFieldResolver"
+        generate      = true
+        path_resolver = true
+      }
+    }
+
+    column "parent" {
+      type              = "int"
+      generate_resolver = true
+    }
+
+    column "source" {
+      type              = "int"
+      generate_resolver = true
+    }
+
+    column "template_repository" {
+      type              = "int"
+      generate_resolver = true
+    }
+
+
+    column "text_matches" {
+      type              = "json"
+      generate_resolver = true
+    }
+
+    column "owner_text_matches" {
+      type              = "json"
+      generate_resolver = true
+    }
+  }
 
 }
