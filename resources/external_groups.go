@@ -2,6 +2,7 @@ package resources
 
 import (
 	"context"
+
 	"github.com/google/go-github/v45/github"
 
 	"github.com/cloudquery/cq-provider-github/client"
