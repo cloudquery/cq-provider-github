@@ -5,6 +5,7 @@ go 1.18
 require (
 	github.com/cloudquery/cq-gen v0.0.5
 	github.com/cloudquery/cq-provider-sdk v0.14.4
+	github.com/golang/mock v1.6.0
 	github.com/google/go-github/v45 v45.2.0
 	github.com/hashicorp/go-hclog v1.2.1
 	golang.org/x/oauth2 v0.0.0-20211104180415-d3ed0bb246c8

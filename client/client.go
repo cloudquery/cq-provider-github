@@ -16,7 +16,7 @@ type Client struct {
 	logger hclog.Logger
 
 	// CHANGEME:  Usually you store here your 3rd party clients and use them in the fetcher
-	Github *github.Client
+	Github GithubServices
 
 	Org string
 
@@ -50,7 +50,13 @@ func Configure(logger hclog.Logger, config interface{}) (schema.ClientMeta, diag
 	// passed by the SDK providerConfig
 	return &Client{
 		logger: logger,
-		Github: client,
-		Orgs:   []string{"cloudquery"},
+		Github: GithubServices{
+			Teams:         client.Teams,
+			Billing:       client.Billing,
+			Repositories:  client.Repositories,
+			Organizations: client.Organizations,
+			Issues:        client.Issues,
+		},
+		Orgs: []string{"cloudquery"},
 	}, nil
 }
