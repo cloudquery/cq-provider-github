@@ -17,10 +17,13 @@ func Provider() *sdkprovider.Provider {
 		Name:      "github",
 		Configure: client.Configure,
 		ResourceMap: map[string]*schema.Table{
-			"organizations":   resources.Organizations(),
-			"repositories":    resources.Repositories(),
-			"teams":           resources.Teams(),
-			"external_groups": resources.ExternalGroups(),
+			"billing.actions":  resources.ActionBillings(),
+			"billing.storage":  resources.StorageBillings(),
+			"billing.packages": resources.PackageBillings(),
+			"organizations":    resources.Organizations(),
+			"repositories":     resources.Repositories(),
+			"teams":            resources.Teams(),
+			"external_groups":  resources.ExternalGroups(),
 		},
 		Config: func() sdkprovider.Config {
 			return &client.Config{}
