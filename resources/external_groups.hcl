@@ -4,6 +4,9 @@ add_generate     = true
 
 resource "github" "" "external_groups" {
   path = "github.com/google/go-github/v45/github.ExternalGroup"
+  options {
+    primary_keys = ["group_id"]
+  }
 
   multiplex "OrgMultiplex" {
     path = "github.com/cloudquery/cq-provider-github/client.OrgMultiplex"
@@ -15,10 +18,6 @@ resource "github" "" "external_groups" {
     resolver "resolveOrg" {
       path = "github.com/cloudquery/cq-provider-github/client.ResolveOrg"
     }
-  }
-
-  options {
-    primary_keys = ["id"]
   }
 }
 
