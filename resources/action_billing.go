@@ -2,6 +2,7 @@ package resources
 
 import (
 	"context"
+
 	"github.com/cloudquery/cq-provider-github/client"
 	"github.com/cloudquery/cq-provider-sdk/provider/schema"
 )
