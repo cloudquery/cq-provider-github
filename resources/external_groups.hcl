@@ -20,6 +20,5 @@ resource "github" "" "external_groups" {
   options {
     primary_keys = ["id"]
   }
-
 }
 
