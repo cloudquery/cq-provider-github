@@ -1,6 +1,8 @@
 package client
 
 import (
+	"testing"
+
 	"github.com/cloudquery/cq-provider-sdk/logging"
 	"github.com/cloudquery/cq-provider-sdk/provider"
 	"github.com/cloudquery/cq-provider-sdk/provider/diag"
@@ -8,7 +10,6 @@ import (
 	providertest "github.com/cloudquery/cq-provider-sdk/provider/testing"
 	"github.com/golang/mock/gomock"
 	"github.com/hashicorp/go-hclog"
-	"testing"
 )
 
 type TestOptions struct{}
