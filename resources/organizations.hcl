@@ -3,7 +3,7 @@ output_directory = "."
 add_generate     = true
 
 resource "github" "" "organizations" {
-  path = "github.com/google/go-github/v45/github.Organization"
+  path = "github.com/google/go-github/v45/github.Installation"
 
   column "text_matches" {
     type              = "json"
@@ -13,5 +13,6 @@ resource "github" "" "organizations" {
   options {
     primary_keys = ["id"]
   }
+
 }
 
