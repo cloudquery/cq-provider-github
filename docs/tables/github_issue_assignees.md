@@ -1,12 +1,11 @@
 
-# Table: github_team_members
+# Table: github_issue_assignees
 User represents a GitHub user.
 ## Columns
 | Name        | Type           | Description  |
 | ------------- | ------------- | -----  |
-|team_cq_id|uuid|Unique CloudQuery ID of github_teams table (FK)|
-|team_id|bigint|The id of the name|
-|org|text|The Github Organization of the resource.|
+|issue_cq_id|uuid|Unique CloudQuery ID of github_issues table (FK)|
+|issue_id|bigint|The id of the issue|
 |login|text||
 |id|bigint||
 |node_id|text||

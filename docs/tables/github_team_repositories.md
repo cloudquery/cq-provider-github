@@ -5,7 +5,7 @@ Repository represents a GitHub repository.
 | Name        | Type           | Description  |
 | ------------- | ------------- | -----  |
 |team_cq_id|uuid|Unique CloudQuery ID of github_teams table (FK)|
-|team_id|text|The id of the team|
+|team_id|bigint|The id of the team|
 |id|bigint||
 |node_id|text||
 |owner_login|text||
@@ -179,7 +179,6 @@ Repository represents a GitHub repository.
 |gitignore_template|text||
 |security_and_analysis_advanced_security_status|text||
 |security_and_analysis_secret_scanning_status|text||
-|team_id|bigint|Creating an organization repository|
 |url|text|API URLs|
 |archive_url|text||
 |assignees_url|text||
