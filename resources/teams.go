@@ -118,8 +118,8 @@ func Teams() *schema.Table {
 					{
 						Name:        "team_id",
 						Description: "The id of the name",
-						Type:        schema.TypeString,
-						Resolver:    schema.ParentResourceFieldResolver("TeamID"),
+						Type:        schema.TypeBigInt,
+						Resolver:    schema.ParentResourceFieldResolver("id"),
 					},
 					{
 						Name:        "org",
@@ -368,8 +368,8 @@ func Teams() *schema.Table {
 					{
 						Name:        "team_id",
 						Description: "The id of the team",
-						Type:        schema.TypeString,
-						Resolver:    schema.ParentResourceFieldResolver("TeamID"),
+						Type:        schema.TypeBigInt,
+						Resolver:    schema.ParentResourceFieldResolver("id"),
 					},
 					{
 						Name:     "id",
@@ -1213,12 +1213,6 @@ func Teams() *schema.Table {
 						Name:     "security_and_analysis_secret_scanning_status",
 						Type:     schema.TypeString,
 						Resolver: schema.PathResolver("SecurityAndAnalysis.SecretScanning.Status"),
-					},
-					{
-						Name:        "team_id",
-						Description: "Creating an organization repository",
-						Type:        schema.TypeBigInt,
-						Resolver:    schema.PathResolver("TeamID"),
 					},
 					{
 						Name:        "url",

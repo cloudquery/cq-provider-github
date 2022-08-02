@@ -7,6 +7,8 @@ resource "github" "" "hooks" {
   options {
     primary_keys = ["id"]
   }
+  ignore_columns_in_tests = ["last_response", "config"]
+
   multiplex "OrgMultiplex" {
     path = "github.com/cloudquery/cq-provider-github/client.OrgMultiplex"
   }
@@ -21,6 +23,15 @@ resource "github" "" "hooks" {
 
   user_relation "github" "" "deliveries" {
     path = "github.com/google/go-github/v45/github.HookDelivery"
+
+
+    column "request_raw_payload" {
+      generate_resolver = true
+    }
+    column "response_raw_payload" {
+      generate_resolver = true
+    }
   }
+
 }
 

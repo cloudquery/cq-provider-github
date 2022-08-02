@@ -60,13 +60,12 @@ resource "github" "" "issues" {
     }
 
     userDefinedColumn "issue_id" {
-      type        = "string"
-      //argument ("name")
+      type        = "int"
       description = "The id of the issue"
       resolver "parentPathResolver" {
         path          = "github.com/cloudquery/cq-provider-sdk/provider/schema.ParentResourceFieldResolver"
-        generate      = true
         path_resolver = true
+        params = ["id"]
       }
     }
 

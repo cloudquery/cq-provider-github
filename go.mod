@@ -3,6 +3,7 @@ module github.com/cloudquery/cq-provider-github
 go 1.18
 
 require (
+	github.com/aws/aws-sdk-go v1.17.7
 	github.com/cloudquery/cq-gen v0.0.5
 	github.com/cloudquery/cq-provider-sdk v0.14.4
 	github.com/cloudquery/faker/v3 v3.7.7

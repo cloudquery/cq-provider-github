@@ -3,10 +3,9 @@ package resources
 import (
 	"context"
 
-	"github.com/google/go-github/v45/github"
-
 	"github.com/cloudquery/cq-provider-github/client"
 	"github.com/cloudquery/cq-provider-sdk/provider/schema"
+	"github.com/google/go-github/v45/github"
 )
 
 //go:generate cq-gen --resource  --config hooks.hcl --output .
@@ -61,13 +60,15 @@ func Hooks() *schema.Table {
 				Resolver: schema.PathResolver("PingURL"),
 			},
 			{
-				Name: "last_response",
-				Type: schema.TypeJSON,
+				Name:          "last_response",
+				Type:          schema.TypeJSON,
+				IgnoreInTests: true,
 			},
 			{
-				Name:        "config",
-				Description: "Only the following fields are used when creating a hook. Config is required.",
-				Type:        schema.TypeJSON,
+				Name:          "config",
+				Description:   "Only the following fields are used when creating a hook. Config is required.",
+				Type:          schema.TypeJSON,
+				IgnoreInTests: true,
 			},
 			{
 				Name: "events",
@@ -147,7 +148,7 @@ func Hooks() *schema.Table {
 					{
 						Name:     "request_raw_payload",
 						Type:     schema.TypeByteArray,
-						Resolver: schema.PathResolver("Request.RawPayload"),
+						Resolver: resolveHookDeliveriesRequestRawPayload,
 					},
 					{
 						Name:     "response_headers",
@@ -157,7 +158,7 @@ func Hooks() *schema.Table {
 					{
 						Name:     "response_raw_payload",
 						Type:     schema.TypeByteArray,
-						Resolver: schema.PathResolver("Response.RawPayload"),
+						Resolver: resolveHookDeliveriesResponseRawPayload,
 					},
 				},
 			},
@@ -199,10 +200,27 @@ func fetchHookDeliveries(ctx context.Context, meta schema.ClientMeta, parent *sc
 		if err != nil {
 			return err
 		}
-		if len(hooks) == 0 {
+		res <- hooks
+		if len(hooks) == 0 || resp.Cursor == "" {
 			return nil
 		}
-		res <- hooks
 		opts.Cursor = resp.Cursor
 	}
+}
+func resolveHookDeliveriesRequestRawPayload(ctx context.Context, meta schema.ClientMeta, resource *schema.Resource, c schema.Column) error {
+	hd := resource.Item.(*github.HookDelivery)
+	data, err := hd.Request.RawPayload.MarshalJSON()
+	if err != nil {
+		return err
+	}
+	return resource.Set(c.Name, data)
+}
+
+func resolveHookDeliveriesResponseRawPayload(ctx context.Context, meta schema.ClientMeta, resource *schema.Resource, c schema.Column) error {
+	hd := resource.Item.(*github.HookDelivery)
+	data, err := hd.Response.RawPayload.MarshalJSON()
+	if err != nil {
+		return err
+	}
+	return resource.Set(c.Name, data)
 }

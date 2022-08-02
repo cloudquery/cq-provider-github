@@ -85,6 +85,9 @@ resource "github" "" "teams" {
         path_resolver = true
       }
     }
+    column "team_id" {
+      skip = true
+    }
 
     column "parent" {
       type              = "int"

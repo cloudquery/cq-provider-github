@@ -1314,8 +1314,8 @@ func Issues() *schema.Table {
 					{
 						Name:        "issue_id",
 						Description: "The id of the issue",
-						Type:        schema.TypeString,
-						Resolver:    schema.ParentResourceFieldResolver("IssueID"),
+						Type:        schema.TypeBigInt,
+						Resolver:    schema.ParentResourceFieldResolver("id"),
 					},
 					{
 						Name: "login",
