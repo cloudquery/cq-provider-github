@@ -9,6 +9,14 @@ resource "github" "" "repositories" {
     path = "github.com/cloudquery/cq-provider-github/client.OrgMultiplex"
   }
 
+  userDefinedColumn "org" {
+    type        = "string"
+    description = "The Github Organization of the resource."
+    resolver "resolveOrg" {
+      path = "github.com/cloudquery/cq-provider-github/client.ResolveOrg"
+    }
+  }
+
   column "parent" {
     type              = "int"
     generate_resolver = true
