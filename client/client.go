@@ -57,6 +57,6 @@ func Configure(logger hclog.Logger, config interface{}) (schema.ClientMeta, diag
 			Organizations: client.Organizations,
 			Issues:        client.Issues,
 		},
-		Orgs: config.Orgs,
+		Orgs: providerConfig.Orgs,
 	}, nil
 }
