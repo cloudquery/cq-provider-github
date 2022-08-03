@@ -3,6 +3,7 @@ package resources
 import (
 	"context"
 	"encoding/json"
+	"github.com/cloudquery/cq-provider-sdk/provider/diag"
 
 	"github.com/google/go-github/v45/github"
 
@@ -1563,7 +1564,7 @@ func fetchIssues(ctx context.Context, meta schema.ClientMeta, parent *schema.Res
 	for {
 		issues, resp, err := c.Github.Issues.ListByOrg(ctx, c.Org, opts)
 		if err != nil {
-			return err
+			return diag.WrapError(err)
 		}
 		res <- issues
 		opts.Page = resp.NextPage
@@ -1580,7 +1581,7 @@ func resolveIssuesUserTextMatches(ctx context.Context, meta schema.ClientMeta, r
 	}
 	j, err := json.Marshal(i.User.TextMatches)
 	if err != nil {
-		return err
+		return diag.WrapError(err)
 	}
 	return resource.Set(c.Name, j)
 }
@@ -1591,7 +1592,7 @@ func resolveIssuesAssigneeTextMatches(ctx context.Context, meta schema.ClientMet
 	}
 	j, err := json.Marshal(i.Assignee.TextMatches)
 	if err != nil {
-		return err
+		return diag.WrapError(err)
 	}
 	return resource.Set(c.Name, j)
 }
@@ -1602,7 +1603,7 @@ func resolveIssuesClosedByTextMatches(ctx context.Context, meta schema.ClientMet
 	}
 	j, err := json.Marshal(i.ClosedBy.TextMatches)
 	if err != nil {
-		return err
+		return diag.WrapError(err)
 	}
 	return resource.Set(c.Name, j)
 }
@@ -1616,7 +1617,7 @@ func resolveIssuesMilestoneCreatorTextMatches(ctx context.Context, meta schema.C
 	}
 	j, err := json.Marshal(i.Milestone.Creator.TextMatches)
 	if err != nil {
-		return err
+		return diag.WrapError(err)
 	}
 	return resource.Set(c.Name, j)
 }
@@ -1633,7 +1634,7 @@ func resolveIssuesTextMatches(ctx context.Context, meta schema.ClientMeta, resou
 	i := resource.Item.(*github.Issue)
 	j, err := json.Marshal(i.TextMatches)
 	if err != nil {
-		return err
+		return diag.WrapError(err)
 	}
 	return resource.Set(c.Name, j)
 }
@@ -1651,7 +1652,7 @@ func resolveIssueAssigneesTextMatches(ctx context.Context, meta schema.ClientMet
 	i := resource.Item.(*github.User)
 	j, err := json.Marshal(i.TextMatches)
 	if err != nil {
-		return err
+		return diag.WrapError(err)
 	}
 	return resource.Set(c.Name, j)
 }

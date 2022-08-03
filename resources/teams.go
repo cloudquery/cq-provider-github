@@ -3,6 +3,7 @@ package resources
 import (
 	"context"
 	"encoding/json"
+	"github.com/cloudquery/cq-provider-sdk/provider/diag"
 	"strconv"
 	"strings"
 
@@ -1436,7 +1437,7 @@ func fetchTeams(ctx context.Context, meta schema.ClientMeta, parent *schema.Reso
 	for {
 		repos, resp, err := c.Github.Teams.ListTeams(ctx, c.Org, opts)
 		if err != nil {
-			return err
+			return diag.WrapError(err)
 		}
 		res <- repos
 		opts.Page = resp.NextPage
@@ -1464,12 +1465,12 @@ func fetchTeamMembers(ctx context.Context, meta schema.ClientMeta, parent *schem
 	}
 	orgId, err := strconv.Atoi(strings.Split(*t.MembersURL, "/")[4])
 	if err != nil {
-		return err
+		return diag.WrapError(err)
 	}
 	for {
 		members, resp, err := c.Github.Teams.ListTeamMembersByID(ctx, int64(orgId), *t.ID, opts)
 		if err != nil {
-			return err
+			return diag.WrapError(err)
 		}
 		res <- members
 		opts.Page = resp.NextPage
@@ -1483,7 +1484,7 @@ func resolveTeamMembersTextMatches(ctx context.Context, meta schema.ClientMeta, 
 	u := resource.Item.(*github.User)
 	j, err := json.Marshal(u.TextMatches)
 	if err != nil {
-		return err
+		return diag.WrapError(err)
 	}
 	return resource.Set(c.Name, j)
 }
@@ -1496,12 +1497,12 @@ func fetchTeamRepositories(ctx context.Context, meta schema.ClientMeta, parent *
 	}
 	orgId, err := strconv.Atoi(strings.Split(*t.MembersURL, "/")[4])
 	if err != nil {
-		return err
+		return diag.WrapError(err)
 	}
 	for {
 		repos, resp, err := c.Github.Teams.ListTeamReposByID(ctx, int64(orgId), *t.ID, opts)
 		if err != nil {
-			return err
+			return diag.WrapError(err)
 		}
 		res <- repos
 		opts.Page = resp.NextPage
@@ -1518,7 +1519,7 @@ func resolveTeamRepositoriesOwnerTextMatches(ctx context.Context, meta schema.Cl
 	}
 	j, err := json.Marshal(u.Owner.TextMatches)
 	if err != nil {
-		return err
+		return diag.WrapError(err)
 	}
 	return resource.Set(c.Name, j)
 }
@@ -1547,7 +1548,7 @@ func resolveTeamRepositoriesTextMatches(ctx context.Context, meta schema.ClientM
 	u := resource.Item.(*github.Repository)
 	j, err := json.Marshal(u.TextMatches)
 	if err != nil {
-		return err
+		return diag.WrapError(err)
 	}
 	return resource.Set(c.Name, j)
 }

@@ -2,6 +2,7 @@ package resources
 
 import (
 	"context"
+	"github.com/cloudquery/cq-provider-sdk/provider/diag"
 
 	"github.com/cloudquery/cq-provider-github/client"
 	"github.com/cloudquery/cq-provider-sdk/provider/schema"
@@ -180,7 +181,7 @@ func fetchHooks(ctx context.Context, meta schema.ClientMeta, parent *schema.Reso
 	for {
 		hooks, resp, err := c.Github.Organizations.ListHooks(ctx, c.Org, opts)
 		if err != nil {
-			return err
+			return diag.WrapError(err)
 		}
 		res <- hooks
 		opts.Page = resp.NextPage
@@ -199,7 +200,7 @@ func fetchHookDeliveries(ctx context.Context, meta schema.ClientMeta, parent *sc
 	for {
 		hooks, resp, err := c.Github.Organizations.ListHookDeliveries(ctx, c.Org, *h.ID, opts)
 		if err != nil {
-			return err
+			return diag.WrapError(err)
 		}
 		res <- hooks
 		if len(hooks) == 0 || resp.Cursor == "" {
@@ -212,7 +213,7 @@ func resolveHookDeliveriesRequestRawPayload(ctx context.Context, meta schema.Cli
 	hd := resource.Item.(*github.HookDelivery)
 	data, err := hd.Request.RawPayload.MarshalJSON()
 	if err != nil {
-		return err
+		return diag.WrapError(err)
 	}
 	return resource.Set(c.Name, data)
 }
@@ -221,7 +222,7 @@ func resolveHookDeliveriesResponseRawPayload(ctx context.Context, meta schema.Cl
 	hd := resource.Item.(*github.HookDelivery)
 	data, err := hd.Response.RawPayload.MarshalJSON()
 	if err != nil {
-		return err
+		return diag.WrapError(err)
 	}
 	return resource.Set(c.Name, data)
 }

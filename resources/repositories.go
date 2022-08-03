@@ -3,6 +3,7 @@ package resources
 import (
 	"context"
 	"encoding/json"
+	"github.com/cloudquery/cq-provider-sdk/provider/diag"
 
 	"github.com/cloudquery/cq-provider-github/client"
 	"github.com/cloudquery/cq-provider-sdk/provider/schema"
@@ -1096,7 +1097,7 @@ func fetchRepositories(ctx context.Context, meta schema.ClientMeta, parent *sche
 	for {
 		repos, resp, err := c.Github.Repositories.ListByOrg(ctx, c.Org, opts)
 		if err != nil {
-			return err
+			return diag.WrapError(err)
 		}
 		res <- repos
 		opts.Page = resp.NextPage
@@ -1110,7 +1111,7 @@ func resolveRepositoriesOwnerTextMatches(ctx context.Context, meta schema.Client
 	u := resource.Item.(*github.Repository)
 	j, err := json.Marshal(u.Owner.TextMatches)
 	if err != nil {
-		return err
+		return diag.WrapError(err)
 	}
 	return resource.Set(c.Name, j)
 }
@@ -1139,7 +1140,7 @@ func resolveRepositoriesTextMatches(ctx context.Context, meta schema.ClientMeta,
 	u := resource.Item.(*github.Repository)
 	j, err := json.Marshal(u.TextMatches)
 	if err != nil {
-		return err
+		return diag.WrapError(err)
 	}
 	return resource.Set(c.Name, j)
 }

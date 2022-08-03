@@ -2,6 +2,7 @@ package resources
 
 import (
 	"context"
+	"github.com/cloudquery/cq-provider-sdk/provider/diag"
 
 	"github.com/google/go-github/v45/github"
 
@@ -112,7 +113,7 @@ func fetchExternalGroups(ctx context.Context, meta schema.ClientMeta, parent *sc
 	for {
 		groups, resp, err := c.Github.Teams.ListExternalGroups(ctx, c.Org, opts)
 		if err != nil {
-			return err
+			return diag.WrapError(err)
 		}
 		res <- groups.Groups
 		opts.Page = resp.NextPage
