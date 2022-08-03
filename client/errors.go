@@ -2,8 +2,9 @@ package client
 
 import (
 	"errors"
-	"github.com/google/go-github/v45/github"
 	"net/http"
+
+	"github.com/google/go-github/v45/github"
 )
 
 const EnterpriseOnly = "This organization is not part of externally managed enterprise."
