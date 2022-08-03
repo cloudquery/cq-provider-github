@@ -50,7 +50,7 @@ resource "github" "" "repositories" {
   }
 
   options {
-    primary_keys = ["id"]
+    primary_keys = ["org", "id"]
   }
 
 }

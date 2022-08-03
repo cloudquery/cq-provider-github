@@ -17,7 +17,7 @@ func Repositories() *schema.Table {
 		Resolver:    fetchRepositories,
 		Multiplex:   client.OrgMultiplex,
 		IgnoreError: client.IgnoreError,
-		Options:     schema.TableCreationOptions{PrimaryKeys: []string{"id"}},
+		Options:     schema.TableCreationOptions{PrimaryKeys: []string{"org", "id"}},
 		Columns: []schema.Column{
 			{
 				Name:     "id",
