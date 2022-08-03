@@ -1113,28 +1113,28 @@ func resolveRepositoriesOwnerTextMatches(ctx context.Context, meta schema.Client
 	if err != nil {
 		return diag.WrapError(err)
 	}
-	return resource.Set(c.Name, j)
+	return diag.WrapError(resource.Set(c.Name, j))
 }
 func resolveRepositoriesParent(ctx context.Context, meta schema.ClientMeta, resource *schema.Resource, c schema.Column) error {
 	u := resource.Item.(*github.Repository)
 	if u.Parent == nil {
 		return nil
 	}
-	return resource.Set(c.Name, u.Parent.ID)
+	return diag.WrapError(resource.Set(c.Name, u.Parent.ID))
 }
 func resolveRepositoriesSource(ctx context.Context, meta schema.ClientMeta, resource *schema.Resource, c schema.Column) error {
 	u := resource.Item.(*github.Repository)
 	if u.Source == nil {
 		return nil
 	}
-	return resource.Set(c.Name, u.Source.ID)
+	return diag.WrapError(resource.Set(c.Name, u.Source.ID))
 }
 func resolveRepositoriesTemplateRepository(ctx context.Context, meta schema.ClientMeta, resource *schema.Resource, c schema.Column) error {
 	u := resource.Item.(*github.Repository)
 	if u.TemplateRepository == nil {
 		return nil
 	}
-	return resource.Set(c.Name, u.TemplateRepository.ID)
+	return diag.WrapError(resource.Set(c.Name, u.TemplateRepository.ID))
 }
 func resolveRepositoriesTextMatches(ctx context.Context, meta schema.ClientMeta, resource *schema.Resource, c schema.Column) error {
 	u := resource.Item.(*github.Repository)
@@ -1142,5 +1142,5 @@ func resolveRepositoriesTextMatches(ctx context.Context, meta schema.ClientMeta,
 	if err != nil {
 		return diag.WrapError(err)
 	}
-	return resource.Set(c.Name, j)
+	return diag.WrapError(resource.Set(c.Name, j))
 }

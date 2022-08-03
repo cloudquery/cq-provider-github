@@ -584,7 +584,7 @@ func resolveOrganizationMembersTextMatches(ctx context.Context, meta schema.Clie
 	if err != nil {
 		return diag.WrapError(err)
 	}
-	return resource.Set(c.Name, j)
+	return diag.WrapError(resource.Set(c.Name, j))
 }
 func fetchOrganizationMemberMemberships(ctx context.Context, meta schema.ClientMeta, parent *schema.Resource, res chan<- interface{}) error {
 	c := meta.(*client.Client)

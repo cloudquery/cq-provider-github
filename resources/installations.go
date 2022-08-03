@@ -811,7 +811,7 @@ func resolveInstallationsAccountTextMatches(ctx context.Context, meta schema.Cli
 	if err != nil {
 		return diag.WrapError(err)
 	}
-	return resource.Set(c.Name, j)
+	return diag.WrapError(resource.Set(c.Name, j))
 }
 func resolveInstallationsSuspendedByTextMatches(ctx context.Context, meta schema.ClientMeta, resource *schema.Resource, c schema.Column) error {
 	u := resource.Item.(*github.Installation)
@@ -822,5 +822,5 @@ func resolveInstallationsSuspendedByTextMatches(ctx context.Context, meta schema
 	if err != nil {
 		return diag.WrapError(err)
 	}
-	return resource.Set(c.Name, j)
+	return diag.WrapError(resource.Set(c.Name, j))
 }

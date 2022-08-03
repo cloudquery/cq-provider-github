@@ -1582,7 +1582,7 @@ func resolveIssuesUserTextMatches(ctx context.Context, meta schema.ClientMeta, r
 	if err != nil {
 		return diag.WrapError(err)
 	}
-	return resource.Set(c.Name, j)
+	return diag.WrapError(resource.Set(c.Name, j))
 }
 func resolveIssuesAssigneeTextMatches(ctx context.Context, meta schema.ClientMeta, resource *schema.Resource, c schema.Column) error {
 	i := resource.Item.(*github.Issue)
@@ -1593,7 +1593,7 @@ func resolveIssuesAssigneeTextMatches(ctx context.Context, meta schema.ClientMet
 	if err != nil {
 		return diag.WrapError(err)
 	}
-	return resource.Set(c.Name, j)
+	return diag.WrapError(resource.Set(c.Name, j))
 }
 func resolveIssuesClosedByTextMatches(ctx context.Context, meta schema.ClientMeta, resource *schema.Resource, c schema.Column) error {
 	i := resource.Item.(*github.Issue)
@@ -1604,7 +1604,7 @@ func resolveIssuesClosedByTextMatches(ctx context.Context, meta schema.ClientMet
 	if err != nil {
 		return diag.WrapError(err)
 	}
-	return resource.Set(c.Name, j)
+	return diag.WrapError(resource.Set(c.Name, j))
 }
 func resolveIssuesMilestoneCreatorTextMatches(ctx context.Context, meta schema.ClientMeta, resource *schema.Resource, c schema.Column) error {
 	i := resource.Item.(*github.Issue)
@@ -1618,7 +1618,7 @@ func resolveIssuesMilestoneCreatorTextMatches(ctx context.Context, meta schema.C
 	if err != nil {
 		return diag.WrapError(err)
 	}
-	return resource.Set(c.Name, j)
+	return diag.WrapError(resource.Set(c.Name, j))
 }
 
 func resolveIssuesRepositoryId(ctx context.Context, meta schema.ClientMeta, resource *schema.Resource, c schema.Column) error {
@@ -1627,7 +1627,7 @@ func resolveIssuesRepositoryId(ctx context.Context, meta schema.ClientMeta, reso
 	if i.Repository == nil {
 		return nil
 	}
-	return resource.Set(c.Name, i.Repository.ID)
+	return diag.WrapError(resource.Set(c.Name, i.Repository.ID))
 }
 func resolveIssuesTextMatches(ctx context.Context, meta schema.ClientMeta, resource *schema.Resource, c schema.Column) error {
 	i := resource.Item.(*github.Issue)
@@ -1635,7 +1635,7 @@ func resolveIssuesTextMatches(ctx context.Context, meta schema.ClientMeta, resou
 	if err != nil {
 		return diag.WrapError(err)
 	}
-	return resource.Set(c.Name, j)
+	return diag.WrapError(resource.Set(c.Name, j))
 }
 func fetchIssueLabels(ctx context.Context, meta schema.ClientMeta, parent *schema.Resource, res chan<- interface{}) error {
 	i := parent.Item.(*github.Issue)
@@ -1653,5 +1653,5 @@ func resolveIssueAssigneesTextMatches(ctx context.Context, meta schema.ClientMet
 	if err != nil {
 		return diag.WrapError(err)
 	}
-	return resource.Set(c.Name, j)
+	return diag.WrapError(resource.Set(c.Name, j))
 }

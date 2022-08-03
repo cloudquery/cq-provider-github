@@ -9,7 +9,7 @@ func NewConfig() *Config {
 	return &Config{}
 }
 
-func (_ Config) Example() string {
+func (Config) Example() string {
 	return `
 		access_token: <Access Token HERE>
 		orgs: ["cloudquery"]

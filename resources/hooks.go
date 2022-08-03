@@ -215,7 +215,7 @@ func resolveHookDeliveriesRequestRawPayload(ctx context.Context, meta schema.Cli
 	if err != nil {
 		return diag.WrapError(err)
 	}
-	return resource.Set(c.Name, data)
+	return diag.WrapError(resource.Set(c.Name, data))
 }
 
 func resolveHookDeliveriesResponseRawPayload(ctx context.Context, meta schema.ClientMeta, resource *schema.Resource, c schema.Column) error {
@@ -224,5 +224,5 @@ func resolveHookDeliveriesResponseRawPayload(ctx context.Context, meta schema.Cl
 	if err != nil {
 		return diag.WrapError(err)
 	}
-	return resource.Set(c.Name, data)
+	return diag.WrapError(resource.Set(c.Name, data))
 }
