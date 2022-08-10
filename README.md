@@ -10,7 +10,7 @@ CloudQuery Github Provider ![BuildStatus](https://img.shields.io/github/workflow
 ==================================
 
 This [CloudQuery](https://github.com/cloudquery/cloudquery)
-provider transforms AWS resources to a relational database.
+provider transforms GitHub resources to a relational database.
 
 ## What is CloudQuery
 
