@@ -1,3 +1,5 @@
+This moved to cloudquery https://github.com/cloudquery/cloudquery
+
 See documentation at https://docs.cloudquery.io/docs/developers/developing-new-provider/
 
 <p align="center">
